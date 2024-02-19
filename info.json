@@ -1,0 +1,17 @@
+{
+     "fields": {
+        "project": {
+            "id": "10100",
+            "key": "PRUEB"
+        },
+        "summary": "PRUEBA DE PERFORMANCE",
+        "description": "ESTO ES UNA PRUEBA DE PERFORMANCE, TABLE",
+        "issuetype": {
+            "name": "Test Execution"
+        }
+    },
+
+    "xrayFields": {
+        "testPlanKey": "TP"
+    }
+}
