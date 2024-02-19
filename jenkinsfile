@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+      environment {
+        TESTPLAN = "${params.TESTPLAN}"
+    }
+    stages {
+        stage('CleanWorkspace') {
+            steps {
+                cleanWs()
+            }
+        }
+        stage('git') {
+            steps {
+                git branch: 'main', url: 'https://arpkk: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@github.com/arpkk/Jmeter.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh '''
+                chmod +x jmeter.sh
+                chmod +x table.sh
+                chmod -R 777 apache-jmeter-5.6.2/
+                ./jmeter.sh
+                java -jar jmeter-junit-xml-converter-0.0.1-SNAPSHOT-jar-with-dependencies.jar reportejenkins.jtl reportejenkins.xml
+                sed -i "s|TP|${TESTPLAN}|g" info.json
+                ./table.sh
+                '''
+                
+            }
+        }
+    }
+}
